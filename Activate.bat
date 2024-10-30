@@ -1,8 +1,2 @@
-﻿@echo off
-chcp 65001 > nul
-
-call .\venv\activate.bat
-
-<nul set /p =虚拟环境已激活
-
-@echo on
+﻿@CALL "%~dp0micromamba.exe" shell init --shell cmd.exe --prefix "%~dp0\"
+start cmd /k "%~dp0condabin\micromamba.bat" activate Pycdc
