@@ -64,10 +64,17 @@ del get-pip.py
 echo.
 "%VIRTUAL_ENV%\python.exe" -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
+:: 安装PyInstaller
+<nul set /p =正在安装PyInstaller...
+echo.
+
 :: 安装必要的Python包
 <nul set /p =正在安装Python包...
 echo.
 "%VIRTUAL_ENV%\python.exe" -m pip install customtkinter pillow pyinstaller darkdetect packaging cmake
+:: 输出安装结果
+<nul set /p =Python包安装完成！
+echo.
 
 :: 检查MinGW是否已安装
 if not exist "%MINGW_INSTALL_PATH%\mingw64\bin\gcc.exe" (
