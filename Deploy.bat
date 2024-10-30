@@ -75,7 +75,6 @@ if not exist "cmake-3.28.1-windows-x86_64.msi" (
 <nul set /p =正在安装CMake...
 echo.
 start /wait msiexec /i cmake-3.28.1-windows-x86_64.msi /quiet /norestart
-del cmake-3.28.1-windows-x86_64.msi
 
 :: 检查MinGW是否已安装
 if not exist "%MINGW_INSTALL_PATH%\mingw64\bin\gcc.exe" (
