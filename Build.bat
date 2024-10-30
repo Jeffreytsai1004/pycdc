@@ -1,38 +1,38 @@
 @echo off
-echo å¼€å§‹æ„å»º pycdc...
+echo ¿ªÊ¼¹¹½¨ pycdc...
 
-:: ä½¿ç”¨ .\python\python.exe
+:: Ê¹ÓÃ .\python\python.exe
 set PYTHON_PATH=.\python\python.exe
 
-:: æ¿€æ´»venv
+:: ¼¤»îvenv
 .\venv\Scripts\activate
 
-:: åˆ›å»ºæ„å»ºç›®å½•
+:: ´´½¨¹¹½¨Ä¿Â¼
 if not exist build mkdir build
 cd build
 
-:: è¿è¡Œ CMake
-echo æ­£åœ¨é…ç½® CMake...
+:: ÔËĞĞ CMake
+echo ÕıÔÚÅäÖÃ CMake...
 cmake -G "MinGW Makefiles" ..
 
-:: ç¼–è¯‘
-echo æ­£åœ¨ç¼–è¯‘...
+:: ±àÒë
+echo ÕıÔÚ±àÒë...
 mingw32-make
 
-:: æ£€æŸ¥ç¼–è¯‘ç»“æœ
+:: ¼ì²é±àÒë½á¹û
 if %ERRORLEVEL% neq 0 (
-    echo ç¼–è¯‘å¤±è´¥ï¼
+    echo ±àÒëÊ§°Ü£¡
     cd ..
     pause
     exit /b 1
 )
 
-:: åˆ›å»º Release ç›®å½•å¹¶å¤åˆ¶æ–‡ä»¶
+:: ´´½¨ Release Ä¿Â¼²¢¸´ÖÆÎÄ¼ş
 if not exist ..\Release mkdir ..\Release
 copy pycdc.exe ..\Release\pycdc.exe
 
-:: æ¸…ç†
+:: ÇåÀí
 cd ..
-echo æ„å»ºå®Œæˆï¼pycdc.exe å·²å¤åˆ¶åˆ° Release ç›®å½•
+echo ¹¹½¨Íê³É£¡pycdc.exe ÒÑ¸´ÖÆµ½ Release Ä¿Â¼
 
 pause 
