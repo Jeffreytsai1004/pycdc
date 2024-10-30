@@ -1,38 +1,62 @@
 @echo off
-echo ¿ªÊ¼¹¹½¨ pycdc...
+chcp 65001 > nul
+<nul set /p =å¼€å§‹æž„å»ºpycdc...
+echo.
 
-:: Ê¹ÓÃ .\python\python.exe
-set PYTHON_PATH=.\python\python.exe
+:: æ¿€æ´»è™šæ‹ŸçŽ¯å¢ƒ
+call .\venv\activate.bat
+<nul set /p =è™šæ‹ŸçŽ¯å¢ƒå·²æ¿€æ´»
+echo.
 
-:: ¼¤»îvenv
-.\venv\Scripts\activate
+:: éªŒè¯çŽ¯å¢ƒ
+<nul set /p =éªŒè¯ç¼–è¯‘çŽ¯å¢ƒ...
+echo.
+where gcc >nul 2>&1
+if %ERRORLEVEL% neq 0 (
+    <nul set /p =Error: gccæœªæ‰¾åˆ°ï¼Œè¯·ç¡®ä¿å·²æ­£ç¡®è¿è¡ŒDeploy.bat
+    echo.
+    pause
+    exit /b 1
+)
 
-:: ´´½¨¹¹½¨Ä¿Â¼
+where mingw32-make >nul 2>&1
+if %ERRORLEVEL% neq 0 (
+    <nul set /p =Error: mingw32-makeæœªæ‰¾åˆ°ï¼Œè¯·ç¡®ä¿å·²æ­£ç¡®è¿è¡ŒDeploy.bat
+    echo.
+    pause
+    exit /b 1
+)
+
+:: åˆ›å»ºæž„å»ºç›®å½•
 if not exist build mkdir build
 cd build
 
-:: ÔËÐÐ CMake
-echo ÕýÔÚÅäÖÃ CMake...
-cmake -G "MinGW Makefiles" ..
+:: é…ç½®CMake
+<nul set /p =æ­£åœ¨é…ç½®CMake...
+echo.
+cmake -G "MinGW Makefiles" -DCMAKE_MAKE_PROGRAM="%CD%\..\mingw64\mingw64\bin\mingw32-make.exe" ..
 
-:: ±àÒë
-echo ÕýÔÚ±àÒë...
-mingw32-make
+:: ç¼–è¯‘
+<nul set /p =æ­£åœ¨ç¼–è¯‘...
+echo.
+"%CD%\..\mingw64\mingw64\bin\mingw32-make.exe"
 
-:: ¼ì²é±àÒë½á¹û
+:: æ£€æŸ¥ç¼–è¯‘
 if %ERRORLEVEL% neq 0 (
-    echo ±àÒëÊ§°Ü£¡
+    <nul set /p =ç¼–è¯‘å¤±è´¥ï¼
+    echo.
     cd ..
     pause
     exit /b 1
 )
 
-:: ´´½¨ Release Ä¿Â¼²¢¸´ÖÆÎÄ¼þ
+:: åˆ›å»ºReleaseç›®å½•å¹¶å¤åˆ¶æ–‡ä»¶
 if not exist ..\Release mkdir ..\Release
 copy pycdc.exe ..\Release\pycdc.exe
 
-:: ÇåÀí
+:: å®Œæˆ
 cd ..
-echo ¹¹½¨Íê³É£¡pycdc.exe ÒÑ¸´ÖÆµ½ Release Ä¿Â¼
+<nul set /p =ç¼–è¯‘å®Œæˆï¼pycdc.exe å·²å¤åˆ¶åˆ° Release ç›®å½•
+echo.
 
-pause 
+pause

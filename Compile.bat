@@ -1,11 +1,16 @@
 ﻿@echo off
+chcp 65001 > nul
 
-:: 使用 .\python\python.exe
-set PYTHON_PATH=.\python\python.exe
+:: 激活虚拟环境
+call .\venv\activate.bat
+<nul set /p =虚拟环境已激活
+echo.
 
-:: 激活venv
-.\venv\Scripts\activate
-
+:: 使用PyInstaller编译
+<nul set /p =正在编译...
+echo.
 python -m PyInstaller decompiler.spec --clean
 
-@echo pause
+<nul set /p =编译完成！
+echo.
+pause

@@ -29,11 +29,14 @@ xcopy /E /I /Y "python" "venv"
 :: 创建site-packages目录
 mkdir "venv\Lib\site-packages"
 
+:: 设置MinGW安装路径
+set "MINGW_INSTALL_PATH=%CD%\mingw64"
+
 :: 创建激活脚本
 (
 echo @echo off
 echo set "VIRTUAL_ENV=%CD%\venv"
-echo set "PATH=%CD%\venv;%%PATH%%"
+echo set "PATH=%CD%\venv;%CD%\mingw64\mingw64\bin;%%PATH%%"
 echo set "PYTHONPATH=%CD%\venv\Lib;%CD%\venv\Lib\site-packages"
 echo set "PROMPT=(venv) %%PROMPT%%"
 ) > venv\activate.bat
@@ -64,10 +67,7 @@ echo.
 :: 安装必要的Python包
 <nul set /p =正在安装Python包...
 echo.
-"%VIRTUAL_ENV%\python.exe" -m pip install customtkinter pillow pyinstaller darkdetect packaging
-
-:: 设置MinGW安装路径
-set "MINGW_INSTALL_PATH=%CD%\mingw64"
+"%VIRTUAL_ENV%\python.exe" -m pip install customtkinter pillow pyinstaller darkdetect packaging cmake
 
 :: 检查MinGW是否已安装
 if not exist "%MINGW_INSTALL_PATH%\mingw64\bin\gcc.exe" (
@@ -98,9 +98,6 @@ if not exist "%MINGW_INSTALL_PATH%\mingw64\bin\gcc.exe" (
 ) else (
     echo MinGW已安装，跳过安装
 )
-
-:: 设置MinGW环境变量
-set "PATH=%MINGW_INSTALL_PATH%\mingw64\bin;%PATH%"
 
 :: 验证MinGW安装
 where gcc >nul 2>&1
