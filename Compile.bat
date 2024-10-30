@@ -9,8 +9,10 @@ call "%VIRTUAL_ENV%\Scripts\activate.bat"
 
 echo 开始打包...
 
+python -m pip install customtkinter pillow pyinstaller darkdetect packaging
+
 :: 编译
-"%VIRTUAL_ENV%\python.exe" -m pyinstaller decompiler.spec --clean
+python -m pyinstaller decompiler.spec --clean
 
 if %ERRORLEVEL% neq 0 (
     echo 打包失败！

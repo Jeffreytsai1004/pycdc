@@ -1,4 +1,7 @@
 @echo off
+
+set python=%CD%\python\python.exe
+
 :: 设置代码页为UTF-8
 chcp 65001 > nul
 
@@ -27,6 +30,9 @@ xcopy /E /I /Y "python" "venv"
 mkdir "venv\Lib" 2>nul
 mkdir "venv\Lib\site-packages" 2>nul
 mkdir "venv\Scripts" 2>nul
+
+:: 激活虚拟环境
+call "%VIRTUAL_ENV%\Scripts\activate.bat"
 
 :: 设置MinGW安装路径
 set "MINGW_INSTALL_PATH=%CD%\mingw64"
