@@ -1,6 +1,12 @@
 @echo off
 echo 开始构建 pycdc...
 
+:: 使用 .\python\python.exe
+set PYTHON_PATH=.\python\python.exe
+
+:: 激活venv
+.\venv\Scripts\activate
+
 :: 创建构建目录
 if not exist build mkdir build
 cd build

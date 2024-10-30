@@ -1,13 +1,14 @@
 @echo off
 echo 正在部署开发环境...
 
-:: 检查 Python
-where python >nul 2>nul
-if %ERRORLEVEL% neq 0 (
-    echo 未找到 Python，请先安装 Python 3.12
-    pause
-    exit /b 1
-)
+:: 使用 .\python\python.exe
+set PYTHON_PATH=.\python\python.exe
+
+:: 使用 .\python\python.exe在本路径下新建venv
+%PYTHON_PATH% -m venv venv
+
+:: 激活venv
+.\venv\Scripts\activate
 
 :: 检查 pip 并安装 pip,如果未安装pip则安装pip
 python -m ensurepip
