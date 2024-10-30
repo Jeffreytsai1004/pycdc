@@ -1,23 +1,20 @@
 @echo off
 :: 设置代码页为UTF-8
 chcp 65001 > nul
+
 :: 使用echo命令输出UTF-8文本
-<nul set /p =正在部署开发环境...
-echo.
+echo 正在部署开发环境...
 
 :: 检查Python路径是否存在
 if not exist ".\python\python.exe" (
-    <nul set /p =Error: .\python\python.exe 不存在
-    echo.
-    <nul set /p =请确保Python目录已正确放置
-    echo.
+    echo Error: .\python\python.exe 不存在
+    echo 请确保Python目录已正确放置
     pause
     exit /b 1
 )
 
 :: 创建虚拟环境目录结构
-<nul set /p =创建虚拟环境...
-echo.
+echo 创建虚拟环境...
 
 if exist "venv" (
     rmdir /s /q venv
@@ -47,31 +44,26 @@ echo set "PROMPT=(venv) %%PROMPT%%"
 :: 激活虚拟环境
 call .\venv\Scripts\activate.bat
 
-:: 下载pip安装程序
-<nul set /p =正在下载pip安装程序...
-echo.
-if not exist "get-pip.py" (
-    powershell -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://bootstrap.pypa.io/get-pip.py' -OutFile 'get-pip.py'"
+:: 复制pip相关文件
+echo 配置pip...
+if exist "python\Scripts\pip.exe" (
+    copy "python\Scripts\pip.exe" "venv\Scripts\"
+    copy "python\Scripts\pip3.exe" "venv\Scripts\"
+    copy "python\Scripts\pip3.12.exe" "venv\Scripts\"
 )
 
-:: 创建pip.bat
-(
-echo @echo off
-echo "%VIRTUAL_ENV%\python.exe" -m pip %%*
-) > "%VIRTUAL_ENV%\Scripts\pip.bat"
+:: 验证pip安装
+echo 验证pip安装...
+"%VIRTUAL_ENV%\Scripts\pip.exe" --version
+if %ERRORLEVEL% neq 0 (
+    echo Error: pip安装失败
+    pause
+    exit /b 1
+)
 
-:: 删除临时文件
-del get-pip.py
-
-:: 设置pip源为清华镜像
-<nul set /p =正在配置pip源...
-echo.
-"%VIRTUAL_ENV%\python.exe" -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-
-:: 安装必要的Python包
-<nul set /p =正在安装Python包...
-echo.
-"%VIRTUAL_ENV%\python.exe" -m pip install customtkinter pillow pyinstaller darkdetect packaging
+echo 安装其他依赖...
+"%VIRTUAL_ENV%\Scripts\pip.exe" install customtkinter pillow pyinstaller darkdetect packaging
+"%VIRTUAL_ENV%\Scripts\pip.exe" list
 
 :: 下载并安装CMake
 <nul set /p =正在下载CMake...
@@ -108,9 +100,7 @@ if not exist "%MINGW_INSTALL_PATH%\mingw64\bin\gcc.exe" (
     echo.
     7zr.exe x mingw64.7z -o"%MINGW_INSTALL_PATH%" -y
     
-    :: 清理下载的文件
-    del mingw64.7z
-    del 7zr.exe
+
 ) else (
     echo MinGW已安装，跳过安装
 )
