@@ -33,7 +33,7 @@ else:
     print(f"警告: 未找到图标文件: {png_path}")
 
 # 检查 pycdc.exe 是否存在
-pycdc_path = os.path.join('Release', 'pycdc.exe')
+pycdc_path = os.path.join('build', 'Release', 'pycdc.exe')
 if not os.path.exists(pycdc_path):
     raise FileNotFoundError(f"找不到 pycdc.exe，请确保文件位于: {os.path.abspath(pycdc_path)}")
 
