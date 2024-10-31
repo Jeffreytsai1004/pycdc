@@ -13,6 +13,10 @@ mkdir build && cd build
 cmake ..
 make
 ```
+6 Build your webui
+```
+python -m PyInstaller decompiler.spec
+```
 
 # Decompyle++ 
 ***A Python Byte-code Disassembler/Decompiler***
