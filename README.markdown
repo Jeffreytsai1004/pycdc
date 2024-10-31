@@ -6,6 +6,10 @@
 ```
 git clone [https://github.com/zrax/pycdc.git](https://github.com/Jeffreytsai1004/pycdc)
 ```
+5 Install Dependencies
+```
+python -m pip install -r requirements.txt
+```
 5 Build pycdc.exe
 ```
 cd pycdc
