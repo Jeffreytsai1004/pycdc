@@ -19,6 +19,7 @@ cmake ..
 ```
 6 Build your webui
 ```
+cd ..
 python -m PyInstaller decompiler.spec
 ```
 
