@@ -15,7 +15,7 @@ python -m pip install -r requirements.txt
 cd pycdc
 mkdir build && cd build
 cmake ..
-make
+"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" pycdc.sln /p:Configuration=Release
 ```
 6 Build your webui
 ```
