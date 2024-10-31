@@ -1,27 +1,3 @@
-# Build Steps
-1 Install [Python](https://www.python.org/downloads/release/python-3127/）
-2 Install [CMake](https://cmake.org/download/)
-3 Install [Make](https://blog.csdn.net/weixin_41896770/article/details/131262178?ops_request_misc=%257B%2522request%255Fid%2522%253A%252224C61B1D-5EF3-439D-9603-3C31BA8BD42F%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=24C61B1D-5EF3-439D-9603-3C31BA8BD42F&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-131262178-null-null.142^v100^pc_search_result_base9&utm_term=make%20windows)
-4 Clone the repositories
-```
-git clone [https://github.com/zrax/pycdc.git](https://github.com/Jeffreytsai1004/pycdc)
-```
-5 Install Dependencies
-```
-python -m pip install -r requirements.txt
-```
-5 Build pycdc.exe
-```
-cd pycdc
-mkdir build && cd build
-cmake ..
-make
-```
-6 Build your webui
-```
-python -m PyInstaller decompiler.spec
-```
-
 # Decompyle++ 
 ***A Python Byte-code Disassembler/Decompiler***
 

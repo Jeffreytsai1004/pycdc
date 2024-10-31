@@ -6,11 +6,3 @@
 /.kdev4
 __pycache__
 tests-out
-/venv
-/mingw64
-/build
-/Release/CMakeFiles
-Release/CMakeCache.txt
-Release/cmake_install.cmake
-Release/libpycxx.a
-Release/Makefile
